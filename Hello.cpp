@@ -4,6 +4,7 @@ using namespace std;
 
 int main ()
 {
+    //simple git test
     string word;
     
     while (word != "hello")
