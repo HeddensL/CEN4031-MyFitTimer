@@ -1,5 +1,5 @@
 MyFitTimer Web Application
 
-Presentation - Sarah Valle
-Application - Logan Heddens
-Database - Amy Collier
+Presentation - Sarah Valle <br />
+Application - Logan Heddens <br />
+Database - Amy Collier <br />
