@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitTimer.Server", "MyFitTimer\Server\MyFitTimer.Server.csproj", "{14EA0B9E-6A77-4128-A21F-22DF7B8BDCE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFitTimer.Server", "MyFitTimer\Server\MyFitTimer.Server.csproj", "{14EA0B9E-6A77-4128-A21F-22DF7B8BDCE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitTimer.Client", "MyFitTimer\Client\MyFitTimer.Client.csproj", "{B476CC64-C6E6-4F89-9326-1BB9F022E3C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFitTimer.Client", "MyFitTimer\Client\MyFitTimer.Client.csproj", "{B476CC64-C6E6-4F89-9326-1BB9F022E3C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitTimer.Shared", "MyFitTimer\Shared\MyFitTimer.Shared.csproj", "{229ED0DA-E15D-4489-B771-66D44C0EEC32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFitTimer.Shared", "MyFitTimer\Shared\MyFitTimer.Shared.csproj", "{229ED0DA-E15D-4489-B771-66D44C0EEC32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{32BB8E8A-14BE-4854-A0EB-D2401C9FC743}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFitTimer.Test", "MyFitTimer.Test\MyFitTimer.Test.csproj", "{EA26CEFE-E08C-4A07-A844-D98B87D65B2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{229ED0DA-E15D-4489-B771-66D44C0EEC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{229ED0DA-E15D-4489-B771-66D44C0EEC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{229ED0DA-E15D-4489-B771-66D44C0EEC32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA26CEFE-E08C-4A07-A844-D98B87D65B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA26CEFE-E08C-4A07-A844-D98B87D65B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA26CEFE-E08C-4A07-A844-D98B87D65B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA26CEFE-E08C-4A07-A844-D98B87D65B2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
