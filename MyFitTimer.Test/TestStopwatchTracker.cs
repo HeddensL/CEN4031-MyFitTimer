@@ -66,10 +66,9 @@ namespace MyFitTimer.Test
         [Test]//ensures elapsed time is shown
         public void TestGetLap()
         {
-            var time = watch.GetLap();
-            string result = time.ToString();
+            var result = watch.GetLap();
 
-            Assert.AreEqual(result, "00:00:00");
+            Assert.AreEqual(result, 0);
         }
 
         [Test]//ensure Stop stores lap
@@ -78,7 +77,8 @@ namespace MyFitTimer.Test
             watch.Restart();
             Thread.Sleep(3000);
             watch.Stop();
-            var time = watch.GetLap();
+            var ticks = watch.GetLap();
+            TimeSpan time = TimeSpan.FromTicks(ticks);
             int result = time.Seconds;
 
             Assert.AreEqual(result, 3);

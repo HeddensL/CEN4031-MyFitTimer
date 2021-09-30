@@ -15,9 +15,9 @@ namespace MyFitTimer.Server
         }
 
         //returns previous lap
-        public TimeSpan GetLap()
+        public long GetLap()
         {
-            return lap;
+            return lap.Ticks;
         }
 
         public void Restart()
