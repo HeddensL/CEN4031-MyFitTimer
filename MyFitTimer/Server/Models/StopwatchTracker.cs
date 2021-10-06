@@ -4,10 +4,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyFitTimer.Server
+namespace MyFitTimer.Server.Models
 {
     public class StopwatchTracker
     {
+        private bool is_stopwatchrunning = false;
+
+        private TimeSpan _timer;
+
+        public void async Task Start()
+        {
+            is_stopwatchrunning = true;
+            _timer = new TimeSpan();
+            while (is_stopwatchrunning)
+            {
+                Task.Delay(1000);
+                if (is_stopwatchrunning)
+                {
+                    _timer = _timer.Add(new TimeSpan(0, 0, 1));
+                }
+            }
+        }
+
+        public long GetElapsed()
+        {
+            return _timer.Ticks;
+        }
+
+        public void Stop()
+        {
+            is_stopwatchrunning = false;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //return currently elapsed time
         public TimeSpan GetElapsed()
         {

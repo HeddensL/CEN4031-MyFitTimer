@@ -9,6 +9,6 @@ namespace MyFitTimer.Shared
     public class Stopwatcher
     {
         public int Id { get; set; }
-        public long Time { get; set; }
+        public long Time { get; set; }                
     }
 }

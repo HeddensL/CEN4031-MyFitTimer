@@ -42,6 +42,13 @@ namespace MyFitTimer.Client.Services
             OnChange.Invoke();
             return Times;
         }
+
+
+        //business logic calls
+        public async Task StartTimer()
+        {
+            Stopwatcher 
+        }
     }
 
     

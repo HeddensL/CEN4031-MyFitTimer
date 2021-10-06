@@ -8,8 +8,8 @@
 
 <br />
 <h2>Time: @currentTime</h2>
-<button class="btn btn-primary" @onclick="Start">Start Timer</button>
-<button class="btn btn-primary" @onclick="Stop">Stop Timer</button>
+<button class="btn btn-primary" @onclick="StartTimer">Start Timer</button>
+<button class="btn btn-primary" @onclick="StopTimer">Stop Timer</button>
 <br />
 
 @if (StopwatcherService.Latest.Id == 0)
@@ -37,32 +37,9 @@ else
 
 @code{
     protected TimeSpan currentTime = new TimeSpan(0, 0, 0);
-    private bool is_stopwatchrunning = false;
-    public Stopwatcher endTime { get; set; } = new Stopwatcher();
-
-    public async Task Start()
+   
+    public async void StopTimer()
     {
-        is_stopwatchrunning = true;
-        while (is_stopwatchrunning)
-        {
-            await Task.Delay(1000);
-            if (is_stopwatchrunning)
-            {
-                currentTime = currentTime.Add(new TimeSpan(0, 0, 1));
-                StateHasChanged();
-            }
-        }
-    }
-
-    public async void Stop()
-    {
-        is_stopwatchrunning = false;
-
-        endTime.Time = currentTime.Ticks;
-        currentTime = new TimeSpan();
-
-
-
         Console.WriteLine("Stop was called!");
         await JSRuntime.InvokeVoidAsync("console.log", endTime);
 
