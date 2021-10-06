@@ -10,25 +10,48 @@ using MyFitTimer.Shared;
 using MyFitTimer.Server.Services;
 using MyFitTimer.Server.Models;
 
+
 namespace MyFitTimer.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class StopwatchTrackerController : ControllerBase
     {
-        private readonly StopwatchTracker _stopwatchTracker;
+        private readonly StopwatchTrackerModel _stopwatchTrackerModel;
 
-        public StopwatchTrackerController(StopwatchTracker stopwatchTracker)
+        private StopwatchTracker ret { get; set; } = new StopwatchTracker()
         {
-            _stopwatchTracker = stopwatchTracker;
+            Start = 0,
+            Stop = 0,
+            Elapsed = 0
+        };
+
+        public StopwatchTrackerController(StopwatchTrackerModel stopwatchTrackerModel)
+        {
+            _stopwatchTrackerModel = stopwatchTrackerModel;
         }
 
-        [HttpHead]
+        [HttpGet]
         public async Task<IActionResult> StartWatch()
         {
-            _stopwatchTracker.Start();
+            _stopwatchTrackerModel.Start();
 
-            return Ok();
+            return Ok(await _stopwatchTrackerModel.GetElapsed());
         }
+
+        /*[HttpGet("elapsed")]
+        public async Task<IActionResult> GetElaspsed()
+        {            
+            return Ok(await _stopwatchTrackerModel.GetElapsed());
+        }
+
+        [HttpGet("stop")]
+        public async Task<IActionResult> Stop()
+        {
+            _stopwatchTrackerModel.Stop();
+
+
+            return Ok(await _stopwatchTrackerModel.GetElapsed());
+        }*/
     }
 }

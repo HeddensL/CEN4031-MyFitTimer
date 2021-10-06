@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject IStopwatcherService StopwatcherService
+@inject IStopwatchTrackerService StopwatchTrackerService
 @inject IJSRuntime JSRuntime
 @implements IDisposable
 
@@ -37,13 +38,26 @@ else
 
 @code{
     protected TimeSpan currentTime = new TimeSpan(0, 0, 0);
-   
+    bool started = true;
+
+    public async void StartTimer()
+    {
+        await StopwatchTrackerService.Start();
+
+        while (started == true)
+        {
+            //await Task.Delay(500);
+            //await StopwatchTrackerService.GetElapsed();
+            currentTime = TimeSpan.FromTicks(StopwatchTrackerService.ElapsedTime.Elapsed);
+            StateHasChanged();
+        }
+    }
+
     public async void StopTimer()
     {
+        started = false;
         Console.WriteLine("Stop was called!");
-        await JSRuntime.InvokeVoidAsync("console.log", endTime);
-
-        await StopwatcherService.CreateStopwatcher(endTime);
+        await StopwatchTrackerService.Stop();
         await StopwatcherService.LatestTime();
         StopwatcherService.OnChange += StateHasChanged;
     }

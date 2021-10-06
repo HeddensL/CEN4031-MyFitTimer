@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace MyFitTimer.Server.Models
 {
-    public class StopwatchTracker
+    public class StopwatchTrackerModel
     {
         private bool is_stopwatchrunning = false;
 
         private TimeSpan _timer;
 
-        public void async Task Start()
+        public void Start()
         {
             is_stopwatchrunning = true;
             _timer = new TimeSpan();
