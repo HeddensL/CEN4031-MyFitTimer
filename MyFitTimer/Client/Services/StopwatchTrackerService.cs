@@ -29,9 +29,9 @@ namespace MyFitTimer.Client.Services
 
         public async Task<StopwatchTracker> Start()
         {
-            await _httpClient.GetFromJsonAsync<StopwatchTracker>("api/stopwatchtracker");
+            await _httpClient.GetFromJsonAsync<StopwatchTracker>("api/stopwatchtracker/start");
             OnChange.Invoke();
-            return ElapsedTime;
+            return null;
         }
 
         public async Task<StopwatchTracker> Stop()

@@ -38,16 +38,16 @@ else
 
 @code{
     protected TimeSpan currentTime = new TimeSpan(0, 0, 0);
-    bool started = true;
+    bool started;
 
     public async void StartTimer()
     {
-        await StopwatchTrackerService.Start();
-
+        StopwatchTrackerService.Start();
+        started = true;
         while (started == true)
         {
-            //await Task.Delay(500);
-            //await StopwatchTrackerService.GetElapsed();
+            await Task.Delay(500);
+            StopwatchTrackerService.GetElapsed();
             currentTime = TimeSpan.FromTicks(StopwatchTrackerService.ElapsedTime.Elapsed);
             StateHasChanged();
         }
@@ -57,7 +57,7 @@ else
     {
         started = false;
         Console.WriteLine("Stop was called!");
-        await StopwatchTrackerService.Stop();
+        StopwatchTrackerService.Stop();
         await StopwatcherService.LatestTime();
         StopwatcherService.OnChange += StateHasChanged;
     }

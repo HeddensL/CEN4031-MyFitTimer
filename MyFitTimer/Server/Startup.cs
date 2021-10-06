@@ -30,6 +30,7 @@ namespace MyFitTimer.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<ITimeKeeperDataService, TimeKeeperDataService>();
+            services.AddScoped<IStopwatchTrackerService, StopwatchTrackerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

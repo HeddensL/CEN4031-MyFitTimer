@@ -24,6 +24,7 @@ namespace MyFitTimer.Server.Data
                 );
         }*/
 
-        public DbSet<Shared.TimeKeeper> TimeKeepers { get; set; }     
+        public DbSet<Shared.TimeKeeper> TimeKeepers { get; set; }
+        public DbSet<Shared.Stopwatcher> Stopwatchers { get; set; }
     }
 }

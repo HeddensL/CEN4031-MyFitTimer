@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using MyFitTimer.Server.Data;
 using MyFitTimer.Shared;
 using MyFitTimer.Server.Services;
-using MyFitTimer.Server.Models;
 
 
 namespace MyFitTimer.Server.Controllers
@@ -17,41 +16,41 @@ namespace MyFitTimer.Server.Controllers
     [ApiController]
     public class StopwatchTrackerController : ControllerBase
     {
-        private readonly StopwatchTrackerModel _stopwatchTrackerModel;
+        private IStopwatchTrackerService topwatchTrackerModel;
+        private readonly ITimeKeeperDataService _timeKeeperDataService;
 
-        private StopwatchTracker ret { get; set; } = new StopwatchTracker()
-        {
-            Start = 0,
-            Stop = 0,
-            Elapsed = 0
-        };
+        public StopwatchTracker ret { get; set; } = new StopwatchTracker();
+        public TimeKeeper ret2 { get; set; } = new TimeKeeper();
 
-        public StopwatchTrackerController(StopwatchTrackerModel stopwatchTrackerModel)
+        public StopwatchTrackerController(IStopwatchTrackerService stopwatchTrackerModel, ITimeKeeperDataService timeKeeperDataService)
         {
-            _stopwatchTrackerModel = stopwatchTrackerModel;
+            topwatchTrackerModel = stopwatchTrackerModel;
+            _timeKeeperDataService = timeKeeperDataService;
         }
 
-        [HttpGet]
+        [HttpGet("start")]
         public async Task<IActionResult> StartWatch()
         {
-            _stopwatchTrackerModel.Start();
+            topwatchTrackerModel.Start();
 
-            return Ok(await _stopwatchTrackerModel.GetElapsed());
+            return Ok();
         }
 
-        /*[HttpGet("elapsed")]
+        [HttpGet("elapsed")]
         public async Task<IActionResult> GetElaspsed()
-        {            
-            return Ok(await _stopwatchTrackerModel.GetElapsed());
+        {
+            ret.Elapsed = topwatchTrackerModel.GetElapsed();
+            return Ok(ret);
         }
 
         [HttpGet("stop")]
         public async Task<IActionResult> Stop()
         {
-            _stopwatchTrackerModel.Stop();
+            topwatchTrackerModel.Stop();
+            ret2.Time = ret.Elapsed;
+            await _timeKeeperDataService.CreateTimeKeepers(ret2);
 
-
-            return Ok(await _stopwatchTrackerModel.GetElapsed());
-        }*/
+            return Ok();
+        }
     }
 }
