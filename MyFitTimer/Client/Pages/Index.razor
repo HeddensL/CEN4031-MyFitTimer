@@ -1,6 +1,5 @@
 ﻿@page "/"
 @inject IStopwatcherService StopwatcherService
-@inject IStopwatchTrackerService StopwatchTrackerService
 @inject IJSRuntime JSRuntime
 @implements IDisposable
 
@@ -9,8 +8,8 @@
 
 <br />
 <h2>Time: @currentTime</h2>
-<button class="btn btn-primary" @onclick="StartTimer">Start Timer</button>
-<button class="btn btn-primary" @onclick="StopTimer">Stop Timer</button>
+<button class="btn btn-primary" @onclick="Start">Start Timer</button>
+<button class="btn btn-primary" @onclick="Stop">Stop Timer</button>
 <br />
 
 @if (StopwatcherService.Latest.Id == 0)
@@ -37,28 +36,34 @@ else
 </h3>
 
 @code{
-    protected TimeSpan currentTime = new TimeSpan(0, 0, 0);
-    bool started;
+    TimeSpan currentTime;
+    StopwatchTracker stopWatch = new StopwatchTracker();
 
-    public async void StartTimer()
+    public async Task Start()
     {
-        StopwatchTrackerService.Start();
-        started = true;
-        while (started == true)
+        stopWatch.Restart();
+
+        while (stopWatch.Running() == true)
         {
-            await Task.Delay(500);
-            StopwatchTrackerService.GetElapsed();
-            currentTime = TimeSpan.FromTicks(StopwatchTrackerService.ElapsedTime.Elapsed);
-            StateHasChanged();
+            if (stopWatch.Running() == true)
+            {
+                await Task.Delay(1000);
+                currentTime = stopWatch.GetElapsed();
+                StateHasChanged();
+            }
         }
     }
 
-    public async void StopTimer()
+    public async void Stop()
     {
-        started = false;
+        stopWatch.Stop();
+
         Console.WriteLine("Stop was called!");
-        StopwatchTrackerService.Stop();
+        await JSRuntime.InvokeVoidAsync("console.log", stopWatch.GetLap());
+        await StopwatcherService.CreateStopwatcher(stopWatch.GetLap());
+
         await StopwatcherService.LatestTime();
+        currentTime = stopWatch.GetElapsed();
         StopwatcherService.OnChange += StateHasChanged;
     }
 

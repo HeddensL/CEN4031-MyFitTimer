@@ -22,7 +22,6 @@ namespace MyFitTimer.Client
 
             builder.Services.AddScoped<ITimeKeeperService, TimeKeeperService>();
             builder.Services.AddScoped<IStopwatcherService, StopwatcherService>();
-            builder.Services.AddScoped<IStopwatchTrackerService, StopwatchTrackerService>();
 
             await builder.Build().RunAsync();
         }

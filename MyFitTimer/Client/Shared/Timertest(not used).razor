@@ -1,0 +1,29 @@
+﻿<p>Time: @currentTime</p>
+<button class="btn btn-primary" @onclick="StopWatch">Start Timer</button>
+<button class="btn btn-primary" @onclick="Stop">Stop Timer</button>
+
+
+@code {
+    System.TimeSpan currentTime = new TimeSpan(0, 0, 0);
+    private bool is_stopwatchrunning = false;
+
+    public async Task StopWatch()
+    {
+        is_stopwatchrunning = true;
+        while (is_stopwatchrunning)
+        {
+            await Task.Delay(1000);
+            if (is_stopwatchrunning)
+            {
+                currentTime = currentTime.Add(new TimeSpan(0, 0, 1));
+                StateHasChanged();
+            }
+        }
+    }
+
+    public void Stop()
+    {
+        is_stopwatchrunning = false;
+        currentTime = new TimeSpan();
+    }
+}
