@@ -1,0 +1,39 @@
+﻿@inject ITimeKeeperService TimeKeeperService 
+@inject IJSRuntime JSRuntime
+<h3>Edit Times</h3>
+
+<EditForm Model="Lap" OnSubmit="HandleSubmit">
+    <div class="form-group">
+        <label>Hours</label>
+        <InputNumber @bind-Value="hours"></InputNumber>
+    </div>
+    <div class="form-group">
+        <label>Minutes</label>
+        <InputNumber @bind-Value="minutes"></InputNumber>
+    </div>
+    <div class="form-group">
+        <label>Seconds</label>
+        <InputNumber @bind-Value="seconds"></InputNumber>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+
+@code {
+    public int hours, minutes, seconds;
+    protected TimeSpan Lap;
+
+    public MyFitTimer.Shared.TimeKeeper Send { get; set; } = new MyFitTimer.Shared.TimeKeeper();
+
+    async void HandleSubmit()
+    {
+        Lap = new TimeSpan(hours, minutes, seconds);
+        Send.Time = Lap.Ticks;
+        hours = seconds = minutes = 0;
+        
+        Console.WriteLine("Submit was called!");
+        await JSRuntime.InvokeVoidAsync("console.log", Send);
+
+        await TimeKeeperService.CreateTimeKeeper(Send);
+    }
+}

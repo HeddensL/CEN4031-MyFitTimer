@@ -1,0 +1,54 @@
+﻿@page "/time"
+@inject ITimeKeeperService TimeKeeperService
+@implements IDisposable
+
+<h1>Fitness Timer</h1>
+
+@if (TimeKeeperService.Times.Count == 0)
+{ 
+    <span>No Saved Times</span>
+}
+else
+{ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Lap</th>
+                <th>Time</th>
+                <th></th>
+            </tr>  
+        </thead>
+        <tbody>
+            @foreach (var time in TimeKeeperService.Times)
+            { 
+            <tr>
+                <td>@time.Id</td>
+                <td>@TimeSpan.FromTicks(time.Time)</td>
+                <td><button class="btn btn-warning" @onclick="() => DeleteTime(time.Id)">Delete</button></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<EditTimer></EditTimer>
+
+
+
+@code {                
+    protected override async Task OnInitializedAsync()
+    {
+        await TimeKeeperService.GetTimeKeepers();
+        TimeKeeperService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        TimeKeeperService.OnChange -= StateHasChanged;
+    }
+
+    void DeleteTime (int id)
+    {
+        TimeKeeperService.DeleteTimeKeeper(id);
+    }
+}
