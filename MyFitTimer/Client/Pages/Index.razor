@@ -4,7 +4,7 @@
 @implements IDisposable
 
 
-<h1>My Fitness Timer Web Application</h1>
+<h1 style="color:purple;"> <b>Team SLAm Dunk Fitness Timer Web Application</b></h1>
 
 <br />
 <h2>Time: @currentTime</h2>
@@ -21,19 +21,15 @@ else
     <h2>Previous Time: @TimeSpan.FromTicks(StopwatcherService.Latest.Time)</h2>
 }
 
-
-<h3>
+<br />
+<h4>
     By
-</h3>
-<h3>
-    Logan Heddens
-</h3>
-<h3>
-    Sarah Valle
-</h3>
-<h3>
-    Amy Collier
-</h3>
+
+    <br /> Logan Heddens
+    <br /> Sarah Valle
+    <br /> Amy Collier
+</h4>
+<br />
 
 @code{
     TimeSpan currentTime;
